@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/main.css"  media="screen,projection"/>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+
+        <!-- Dropdown Structure -->
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">Courses</a></li>
+            <li><a href="#!">Grades</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Profile</a></li>
+        </ul>
+
+        <header>
+            <nav class="top-nav blue">
+                <div class="nav-wrapper cont">
+                    <div><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+                    <a href="index.html" class="breadcrumb">Home</a>
+                    <a href="courses.html" class="breadcrumb">Courses</a>
+                    <a href="course.html" class="breadcrumb">Data Structures</a>
+                    <a href="assignment.html" class="breadcrumb">Assignment 1</a>
+                    <a href="submissions.html" class="breadcrumb">Submissions</a>
+                    <ul class="right hide-on-med-and-down">
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">account_circle</i>Username<i class="material-icons right">arrow_drop_down</i></a></li>
+                    </ul>
+                </div>
+                <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
+                    <li class="blue">
+                        <a class="logo" href="/">
+                            <img id="front-page-logo" src="img/logo_noback.png" class="left" alt=""><div class="logo-text right">MooShark</div></a>
+                    </li>
+                    <li class="bold"><a href="index.html" class="waves-effect waves-teal"><i class="material-icons right">home</i>Home</a></li>
+                    <li class="bold"><a href="about.html" class="waves-effect waves-teal"><i class="material-icons right">help</i>About</a></li>
+                    <li class="bold"><a href="courses.html" class="waves-effect waves-teal"><i class="material-icons right">book</i>Courses</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="cont">
+        <h3><span class="brown brown-text lighten-2 text-lighten-2 heading">_</span><span class="heading heading-text"> Submission</span></h3>
+        </main>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>

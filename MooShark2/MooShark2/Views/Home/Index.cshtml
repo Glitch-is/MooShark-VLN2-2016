@@ -1,0 +1,80 @@
+﻿@model MooShark2.Models.HomeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<main class="cont">
+    <div class="row">
+        <div class="col s12 m12 l6">
+            <ul id="task-card" class="collection with-header">
+                <li class="collection-header cyan">
+                    <h4 class="task-card-title">My Assignments</h4>
+                    <p class="task-card-date">@DateTime.Today.DayOfWeek,  @DateTime.Today.Day/@DateTime.Today.Month/@DateTime.Today.Year</p>
+                </li>
+                @foreach (var item in Model.assignments)
+                {
+                    <a class="collection-link" href="@Url.Action("Index", "Problems", new { id = item.id })">
+                        <li class="collection-item avatar hover">
+                            <i class="material-icons circle green lighten-1"></i>
+                            <div class="row nobot">
+                                <div class="col s5">
+                                    <p class="title truncate">@item.name</p>
+                                </div>
+                                <div class="col s4">
+                                    <p class="due truncate">In @((item.deadline - DateTime.Now).Days) days</p>
+                                </div>
+                                <div class="col s2">
+                                    @if (Model.gradingService.GetGrade(item.id, Model.account.id) > 0)
+                                    {
+                                        <i class="material-icons small left yellow-text">grade</i>
+                                        <p class="grade truncate"> @Model.gradingService.GetGrade(item.id, Model.account.id)</p>
+                                    }
+                                    else
+                                    {
+                                        <span style="visibility: hidden;">_</span>
+
+                                    }
+                                </div>
+                                <div class="col s1">
+                                    @if (Model.gradingService.GetGrade(item.id, Model.account.id) >= 10)
+                                    {
+                                        <span class=""><i class="small material-icons green-text">done_all</i></span>
+                                    }
+                                    else
+                                    {
+                                        <span style="visibility: hidden;">_</span>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    </a>
+
+                }
+            </ul>
+        </div>
+        <div class="col s12 m12 l6">
+            <ul id="task-card" class="collection with-header">
+                <li class="collection-header purple">
+                    <h4 class="task-card-title">My Courses</h4>
+                    <p class="task-card-date">@DateTime.Today.DayOfWeek,  @DateTime.Today.Day/@DateTime.Today.Month/@DateTime.Today.Year</p>
+                </li>
+                @foreach(var item in Model.courses)
+                {
+                <a class="collection-link" href="@Url.Action("Index", "Assignments", new { id = item.id })">
+                    <li class="collection-item avatar hover">
+                        <img src="@item.teachers.FirstOrDefault().account.imagePath" alt="" class="circle">
+                        <div class="row nobot">
+                            <div class="col s7">
+                                <p class="title truncate">@item.name</p>
+                            </div>
+                            <div class="col s5">
+                                <p class="due truncate" style="font-style: italic;">@item.teachers.FirstOrDefault().account.name</p>
+                            </div>
+                        </div>
+                        <a href="#!" class="secondary-content"><i class="small material-icons grey-text text-lighten-1">info</i></a>
+                    </li>
+                </a>
+                }
+            </ul>
+        </div>
+    </div>
+</main>

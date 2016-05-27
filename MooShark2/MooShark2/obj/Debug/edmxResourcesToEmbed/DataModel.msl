@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VLN2_2016_H32ModelStoreContainer" CdmEntityContainer="VLN2_2016_H32Entities">
+    <EntitySetMapping Name="account">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.account">
+        <MappingFragment StoreEntitySet="account">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+          <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+          <ScalarProperty Name="sessionExp" ColumnName="sessionExp" />
+          <ScalarProperty Name="lastLoggedIn" ColumnName="lastLoggedIn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="assignment">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.assignment">
+        <MappingFragment StoreEntitySet="assignment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="deadline" ColumnName="deadline" />
+          <ScalarProperty Name="courseId" ColumnName="courseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clarification">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.clarification">
+        <MappingFragment StoreEntitySet="clarification">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="authorId" ColumnName="authorId" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="posted" ColumnName="posted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clarificationAnswer">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.clarificationAnswer">
+        <MappingFragment StoreEntitySet="clarificationAnswer">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="authorId" ColumnName="authorId" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="posted" ColumnName="posted" />
+          <ScalarProperty Name="clarificationId" ColumnName="clarificationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clarifications">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.clarifications">
+        <MappingFragment StoreEntitySet="clarifications">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="clarificationId" ColumnName="clarificationId" />
+          <ScalarProperty Name="problemId" ColumnName="problemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="courses">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.courses">
+        <MappingFragment StoreEntitySet="courses">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="groupMembers">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.groupMembers">
+        <MappingFragment StoreEntitySet="groupMembers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="teamId" ColumnName="teamId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="problem">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.problem">
+        <MappingFragment StoreEntitySet="problem">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="weight" ColumnName="weight" />
+          <ScalarProperty Name="sampleInput" ColumnName="sampleInput" />
+          <ScalarProperty Name="sampleOutput" ColumnName="sampleOutput" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="problems">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.problems">
+        <MappingFragment StoreEntitySet="problems">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="problemId" ColumnName="problemId" />
+          <ScalarProperty Name="assignmentId" ColumnName="assignmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.roles">
+        <MappingFragment StoreEntitySet="roles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.students">
+        <MappingFragment StoreEntitySet="students">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="courseId" ColumnName="courseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="submission">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.submission">
+        <MappingFragment StoreEntitySet="submission">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="submissions">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.submissions">
+        <MappingFragment StoreEntitySet="submissions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="submissionId" ColumnName="submissionId" />
+          <ScalarProperty Name="teamId" ColumnName="teamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="teachers">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.teachers">
+        <MappingFragment StoreEntitySet="teachers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="courseId" ColumnName="courseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="team">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.team">
+        <MappingFragment StoreEntitySet="team">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="teams">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.teams">
+        <MappingFragment StoreEntitySet="teams">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="assignmentId" ColumnName="assignmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="testcase">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.testcase">
+        <MappingFragment StoreEntitySet="testcase">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="input" ColumnName="input" />
+          <ScalarProperty Name="output" ColumnName="output" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="testcases">
+      <EntityTypeMapping TypeName="VLN2_2016_H32Model.testcases">
+        <MappingFragment StoreEntitySet="testcases">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="testcaseId" ColumnName="testcaseId" />
+          <ScalarProperty Name="problemId" ColumnName="problemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

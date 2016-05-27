@@ -1,0 +1,1585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VLN2_2016_H32Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="257" Nullable="false" />
+          <Property Name="roleId" Type="int" Nullable="false" />
+          <Property Name="imagePath" Type="text" />
+          <Property Name="sessionId" Type="varchar" MaxLength="255" />
+          <Property Name="sessionExp" Type="datetime" />
+          <Property Name="lastLoggedIn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="assignment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="deadline" Type="datetime" Nullable="false" />
+          <Property Name="courseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clarification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="authorId" Type="int" Nullable="false" />
+          <Property Name="message" Type="text" Nullable="false" />
+          <Property Name="posted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="clarificationAnswer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="authorId" Type="int" Nullable="false" />
+          <Property Name="message" Type="text" />
+          <Property Name="posted" Type="datetime" />
+          <Property Name="clarificationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clarifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clarificationId" Type="int" Nullable="false" />
+          <Property Name="problemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="text" />
+        </EntityType>
+        <EntityType Name="grades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grade" Type="int" />
+          <Property Name="assignmentId" Type="int" Nullable="false" />
+          <Property Name="teamId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="groupMembers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="teamId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="problem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="text" Nullable="false" />
+          <Property Name="weight" Type="int" />
+          <Property Name="sampleInput" Type="text" Nullable="false" />
+          <Property Name="sampleOutput" Type="text" Nullable="false" />
+          <Property Name="inputDescription" Type="text" />
+          <Property Name="outputDescription" Type="text" />
+        </EntityType>
+        <EntityType Name="problems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="problemId" Type="int" Nullable="false" />
+          <Property Name="assignmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accountId" Type="int" Nullable="false" />
+          <Property Name="courseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="submission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="text" Nullable="false" />
+          <Property Name="problemId" Type="int" Nullable="false" />
+          <Property Name="submitted" Type="datetime" />
+          <Property Name="status" Type="varchar" MaxLength="255" />
+          <Property Name="languageId" Type="int" />
+          <Property Name="correctTestcases" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="submissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="submissionId" Type="int" Nullable="false" />
+          <Property Name="teamId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teachers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="courseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" />
+        </EntityType>
+        <EntityType Name="teams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="assignmentId" Type="int" Nullable="false" />
+          <Property Name="teamId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="testcase">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="input" Type="text" Nullable="false" />
+          <Property Name="output" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="testcaseOutput">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="submissionId" Type="int" Nullable="false" />
+          <Property Name="testcaseId" Type="int" Nullable="false" />
+          <Property Name="ideoneId" Type="int" />
+          <Property Name="output" Type="text" />
+          <Property Name="statusId" Type="int" />
+          <Property Name="resultId" Type="int" />
+          <Property Name="stderr" Type="text" />
+          <Property Name="time" Type="text" />
+          <Property Name="status" Type="text" />
+        </EntityType>
+        <EntityType Name="testcases">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="testcaseId" Type="int" Nullable="false" />
+          <Property Name="problemId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__account__roleId__22751F6C">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__assignmen__cours__10566F31">
+          <End Role="courses" Type="Self.courses" Multiplicity="1" />
+          <End Role="assignment" Type="Self.assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="assignment">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__autho__4D5F7D71">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="clarificationAnswer" Type="Self.clarificationAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarificationAnswer">
+              <PropertyRef Name="authorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__autho__6166761E">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="clarification" Type="Self.clarification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarification">
+              <PropertyRef Name="authorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__clari__607251E5">
+          <End Role="clarification" Type="Self.clarification" Multiplicity="1" />
+          <End Role="clarificationAnswer" Type="Self.clarificationAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clarification">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarificationAnswer">
+              <PropertyRef Name="clarificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__clari__625A9A57">
+          <End Role="clarification" Type="Self.clarification" Multiplicity="1" />
+          <End Role="clarifications" Type="Self.clarifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clarification">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarifications">
+              <PropertyRef Name="clarificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__probl__0D7A0286">
+          <End Role="problem" Type="Self.problem" Multiplicity="1" />
+          <End Role="clarifications" Type="Self.clarifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="problem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarifications">
+              <PropertyRef Name="problemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__grades__assignme__662B2B3B">
+          <End Role="assignment" Type="Self.assignment" Multiplicity="1" />
+          <End Role="grades" Type="Self.grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assignment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grades">
+              <PropertyRef Name="assignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__grades__teamId__690797E6">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="grades" Type="Self.grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grades">
+              <PropertyRef Name="teamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__groupMemb__teamI__72910220">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="groupMembers" Type="Self.groupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="groupMembers">
+              <PropertyRef Name="teamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__groupMemb__userI__245D67DE">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="groupMembers" Type="Self.groupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="groupMembers">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__problems__assign__114A936A">
+          <End Role="assignment" Type="Self.assignment" Multiplicity="1" />
+          <End Role="problems" Type="Self.problems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assignment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="problems">
+              <PropertyRef Name="assignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__problems__proble__02084FDA">
+          <End Role="problem" Type="Self.problem" Multiplicity="1" />
+          <End Role="problems" Type="Self.problems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="problem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="problems">
+              <PropertyRef Name="problemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__submissio__probl__6DCC4D03">
+          <End Role="problem" Type="Self.problem" Multiplicity="1" />
+          <End Role="submission" Type="Self.submission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="problem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="submission">
+              <PropertyRef Name="problemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__submissio__submi__6EC0713C">
+          <End Role="submission" Type="Self.submission" Multiplicity="1" />
+          <End Role="submissions" Type="Self.submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="submission">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="submissions">
+              <PropertyRef Name="submissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__submissio__teamI__719CDDE7">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="submissions" Type="Self.submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="submissions">
+              <PropertyRef Name="teamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teachers__course__7E37BEF6">
+          <End Role="courses" Type="Self.courses" Multiplicity="1" />
+          <End Role="teachers" Type="Self.teachers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teachers">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teachers__userId__236943A5">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="teachers" Type="Self.teachers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teachers">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teams__assignmen__123EB7A3">
+          <End Role="assignment" Type="Self.assignment" Multiplicity="1" />
+          <End Role="teams" Type="Self.teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assignment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teams">
+              <PropertyRef Name="assignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teams__teamId__6FB49575">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="teams" Type="Self.teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teams">
+              <PropertyRef Name="teamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teams__userId__70A8B9AE">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="teams" Type="Self.teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teams">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testcaseO__submi__6CD828CA">
+          <End Role="submission" Type="Self.submission" Multiplicity="1" />
+          <End Role="testcaseOutput" Type="Self.testcaseOutput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="submission">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="testcaseOutput">
+              <PropertyRef Name="submissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testcaseO__testc__5BAD9CC8">
+          <End Role="testcase" Type="Self.testcase" Multiplicity="1" />
+          <End Role="testcaseOutput" Type="Self.testcaseOutput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testcase">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="testcaseOutput">
+              <PropertyRef Name="testcaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testcases__probl__01142BA1">
+          <End Role="problem" Type="Self.problem" Multiplicity="1" />
+          <End Role="testcases" Type="Self.testcases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="problem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="testcases">
+              <PropertyRef Name="problemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testcases__testc__00200768">
+          <End Role="testcase" Type="Self.testcase" Multiplicity="1" />
+          <End Role="testcases" Type="Self.testcases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testcase">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="testcases">
+              <PropertyRef Name="testcaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_account">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_course">
+          <End Role="courses" Type="Self.courses" Multiplicity="1" />
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VLN2_2016_H32ModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="assignment" EntityType="Self.assignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clarification" EntityType="Self.clarification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clarificationAnswer" EntityType="Self.clarificationAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clarifications" EntityType="Self.clarifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="courses" EntityType="Self.courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grades" EntityType="Self.grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groupMembers" EntityType="Self.groupMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="problem" EntityType="Self.problem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="problems" EntityType="Self.problems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="submission" EntityType="Self.submission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="submissions" EntityType="Self.submissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teachers" EntityType="Self.teachers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teams" EntityType="Self.teams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="testcase" EntityType="Self.testcase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="testcaseOutput" EntityType="Self.testcaseOutput" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="testcases" EntityType="Self.testcases" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__account__roleId__22751F6C" Association="Self.FK__account__roleId__22751F6C">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="account" EntitySet="account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__assignmen__cours__10566F31" Association="Self.FK__assignmen__cours__10566F31">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="assignment" EntitySet="assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__autho__4D5F7D71" Association="Self.FK__clarifica__autho__4D5F7D71">
+            <End Role="account" EntitySet="account" />
+            <End Role="clarificationAnswer" EntitySet="clarificationAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__autho__6166761E" Association="Self.FK__clarifica__autho__6166761E">
+            <End Role="account" EntitySet="account" />
+            <End Role="clarification" EntitySet="clarification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__clari__607251E5" Association="Self.FK__clarifica__clari__607251E5">
+            <End Role="clarification" EntitySet="clarification" />
+            <End Role="clarificationAnswer" EntitySet="clarificationAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__clari__625A9A57" Association="Self.FK__clarifica__clari__625A9A57">
+            <End Role="clarification" EntitySet="clarification" />
+            <End Role="clarifications" EntitySet="clarifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__probl__0D7A0286" Association="Self.FK__clarifica__probl__0D7A0286">
+            <End Role="problem" EntitySet="problem" />
+            <End Role="clarifications" EntitySet="clarifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__grades__assignme__662B2B3B" Association="Self.FK__grades__assignme__662B2B3B">
+            <End Role="assignment" EntitySet="assignment" />
+            <End Role="grades" EntitySet="grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__grades__teamId__690797E6" Association="Self.FK__grades__teamId__690797E6">
+            <End Role="team" EntitySet="team" />
+            <End Role="grades" EntitySet="grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__groupMemb__teamI__72910220" Association="Self.FK__groupMemb__teamI__72910220">
+            <End Role="team" EntitySet="team" />
+            <End Role="groupMembers" EntitySet="groupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__groupMemb__userI__245D67DE" Association="Self.FK__groupMemb__userI__245D67DE">
+            <End Role="account" EntitySet="account" />
+            <End Role="groupMembers" EntitySet="groupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__problems__assign__114A936A" Association="Self.FK__problems__assign__114A936A">
+            <End Role="assignment" EntitySet="assignment" />
+            <End Role="problems" EntitySet="problems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__problems__proble__02084FDA" Association="Self.FK__problems__proble__02084FDA">
+            <End Role="problem" EntitySet="problem" />
+            <End Role="problems" EntitySet="problems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__submissio__probl__6DCC4D03" Association="Self.FK__submissio__probl__6DCC4D03">
+            <End Role="problem" EntitySet="problem" />
+            <End Role="submission" EntitySet="submission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__submissio__submi__6EC0713C" Association="Self.FK__submissio__submi__6EC0713C">
+            <End Role="submission" EntitySet="submission" />
+            <End Role="submissions" EntitySet="submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__submissio__teamI__719CDDE7" Association="Self.FK__submissio__teamI__719CDDE7">
+            <End Role="team" EntitySet="team" />
+            <End Role="submissions" EntitySet="submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teachers__course__7E37BEF6" Association="Self.FK__teachers__course__7E37BEF6">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="teachers" EntitySet="teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teachers__userId__236943A5" Association="Self.FK__teachers__userId__236943A5">
+            <End Role="account" EntitySet="account" />
+            <End Role="teachers" EntitySet="teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teams__assignmen__123EB7A3" Association="Self.FK__teams__assignmen__123EB7A3">
+            <End Role="assignment" EntitySet="assignment" />
+            <End Role="teams" EntitySet="teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teams__teamId__6FB49575" Association="Self.FK__teams__teamId__6FB49575">
+            <End Role="team" EntitySet="team" />
+            <End Role="teams" EntitySet="teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teams__userId__70A8B9AE" Association="Self.FK__teams__userId__70A8B9AE">
+            <End Role="account" EntitySet="account" />
+            <End Role="teams" EntitySet="teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testcaseO__submi__6CD828CA" Association="Self.FK__testcaseO__submi__6CD828CA">
+            <End Role="submission" EntitySet="submission" />
+            <End Role="testcaseOutput" EntitySet="testcaseOutput" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testcaseO__testc__5BAD9CC8" Association="Self.FK__testcaseO__testc__5BAD9CC8">
+            <End Role="testcase" EntitySet="testcase" />
+            <End Role="testcaseOutput" EntitySet="testcaseOutput" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testcases__probl__01142BA1" Association="Self.FK__testcases__probl__01142BA1">
+            <End Role="problem" EntitySet="problem" />
+            <End Role="testcases" EntitySet="testcases" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testcases__testc__00200768" Association="Self.FK__testcases__testc__00200768">
+            <End Role="testcase" EntitySet="testcase" />
+            <End Role="testcases" EntitySet="testcases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_account" Association="Self.FK_students_account">
+            <End Role="account" EntitySet="account" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_course" Association="Self.FK_students_course">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VLN2_2016_H32Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="257" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sessionId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sessionExp" Type="DateTime" Precision="3" />
+          <Property Name="lastLoggedIn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="roles" Relationship="Self.FK__account__roleId__22751F6C" FromRole="account" ToRole="roles" />
+          <NavigationProperty Name="clarificationAnswer" Relationship="Self.FK__clarifica__autho__4D5F7D71" FromRole="account" ToRole="clarificationAnswer" />
+          <NavigationProperty Name="clarification" Relationship="Self.FK__clarifica__autho__6166761E" FromRole="account" ToRole="clarification" />
+          <NavigationProperty Name="groupMembers" Relationship="Self.FK__groupMemb__userI__245D67DE" FromRole="account" ToRole="groupMembers" />
+          <NavigationProperty Name="teachers" Relationship="Self.FK__teachers__userId__236943A5" FromRole="account" ToRole="teachers" />
+          <NavigationProperty Name="teams" Relationship="Self.FK__teams__userId__70A8B9AE" FromRole="account" ToRole="teams" />
+          <NavigationProperty Name="students" Relationship="Self.FK_students_account" FromRole="account" ToRole="students" />
+        </EntityType>
+        <EntityType Name="assignment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="deadline" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="courseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="courses" Relationship="Self.FK__assignmen__cours__10566F31" FromRole="assignment" ToRole="courses" />
+          <NavigationProperty Name="grades" Relationship="Self.FK__grades__assignme__662B2B3B" FromRole="assignment" ToRole="grades" />
+          <NavigationProperty Name="problems" Relationship="Self.FK__problems__assign__114A936A" FromRole="assignment" ToRole="problems" />
+          <NavigationProperty Name="teams" Relationship="Self.FK__teams__assignmen__123EB7A3" FromRole="assignment" ToRole="teams" />
+        </EntityType>
+        <EntityType Name="clarification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="authorId" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="posted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="account" Relationship="Self.FK__clarifica__autho__6166761E" FromRole="clarification" ToRole="account" />
+          <NavigationProperty Name="clarificationAnswer" Relationship="Self.FK__clarifica__clari__607251E5" FromRole="clarification" ToRole="clarificationAnswer" />
+          <NavigationProperty Name="clarifications" Relationship="Self.FK__clarifica__clari__625A9A57" FromRole="clarification" ToRole="clarifications" />
+        </EntityType>
+        <EntityType Name="clarificationAnswer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="authorId" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="posted" Type="DateTime" Precision="3" />
+          <Property Name="clarificationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.FK__clarifica__autho__4D5F7D71" FromRole="clarificationAnswer" ToRole="account" />
+          <NavigationProperty Name="clarification" Relationship="Self.FK__clarifica__clari__607251E5" FromRole="clarificationAnswer" ToRole="clarification" />
+        </EntityType>
+        <EntityType Name="clarifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clarificationId" Type="Int32" Nullable="false" />
+          <Property Name="problemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="clarification" Relationship="Self.FK__clarifica__clari__625A9A57" FromRole="clarifications" ToRole="clarification" />
+          <NavigationProperty Name="problem" Relationship="Self.FK__clarifica__probl__0D7A0286" FromRole="clarifications" ToRole="problem" />
+        </EntityType>
+        <EntityType Name="courses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="assignment" Relationship="Self.FK__assignmen__cours__10566F31" FromRole="courses" ToRole="assignment" />
+          <NavigationProperty Name="teachers" Relationship="Self.FK__teachers__course__7E37BEF6" FromRole="courses" ToRole="teachers" />
+          <NavigationProperty Name="students" Relationship="Self.FK_students_course" FromRole="courses" ToRole="students" />
+        </EntityType>
+        <EntityType Name="grades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grade" Type="Int32" />
+          <Property Name="assignmentId" Type="Int32" Nullable="false" />
+          <Property Name="teamId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="assignment" Relationship="Self.FK__grades__assignme__662B2B3B" FromRole="grades" ToRole="assignment" />
+          <NavigationProperty Name="team" Relationship="Self.FK__grades__teamId__690797E6" FromRole="grades" ToRole="team" />
+        </EntityType>
+        <EntityType Name="groupMembers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teamId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.FK__groupMemb__userI__245D67DE" FromRole="groupMembers" ToRole="account" />
+          <NavigationProperty Name="team" Relationship="Self.FK__groupMemb__teamI__72910220" FromRole="groupMembers" ToRole="team" />
+        </EntityType>
+        <EntityType Name="problem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="weight" Type="Int32" />
+          <Property Name="sampleInput" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sampleOutput" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="inputDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="outputDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="clarifications" Relationship="Self.FK__clarifica__probl__0D7A0286" FromRole="problem" ToRole="clarifications" />
+          <NavigationProperty Name="problems" Relationship="Self.FK__problems__proble__02084FDA" FromRole="problem" ToRole="problems" />
+          <NavigationProperty Name="submission" Relationship="Self.FK__submissio__probl__6DCC4D03" FromRole="problem" ToRole="submission" />
+          <NavigationProperty Name="testcases" Relationship="Self.FK__testcases__probl__01142BA1" FromRole="problem" ToRole="testcases" />
+        </EntityType>
+        <EntityType Name="problems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="problemId" Type="Int32" Nullable="false" />
+          <Property Name="assignmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="assignment" Relationship="Self.FK__problems__assign__114A936A" FromRole="problems" ToRole="assignment" />
+          <NavigationProperty Name="problem" Relationship="Self.FK__problems__proble__02084FDA" FromRole="problems" ToRole="problem" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.FK__account__roleId__22751F6C" FromRole="roles" ToRole="account" />
+        </EntityType>
+        <EntityType Name="students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accountId" Type="Int32" Nullable="false" />
+          <Property Name="courseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.FK_students_account" FromRole="students" ToRole="account" />
+          <NavigationProperty Name="courses" Relationship="Self.FK_students_course" FromRole="students" ToRole="courses" />
+        </EntityType>
+        <EntityType Name="submission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="problemId" Type="Int32" Nullable="false" />
+          <Property Name="submitted" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="languageId" Type="Int32" />
+          <Property Name="correctTestcases" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="problem" Relationship="Self.FK__submissio__probl__6DCC4D03" FromRole="submission" ToRole="problem" />
+          <NavigationProperty Name="submissions" Relationship="Self.FK__submissio__submi__6EC0713C" FromRole="submission" ToRole="submissions" />
+          <NavigationProperty Name="testcaseOutput" Relationship="Self.FK__testcaseO__submi__6CD828CA" FromRole="submission" ToRole="testcaseOutput" />
+        </EntityType>
+        <EntityType Name="submissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="submissionId" Type="Int32" Nullable="false" />
+          <Property Name="teamId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="submission" Relationship="Self.FK__submissio__submi__6EC0713C" FromRole="submissions" ToRole="submission" />
+          <NavigationProperty Name="team" Relationship="Self.FK__submissio__teamI__719CDDE7" FromRole="submissions" ToRole="team" />
+        </EntityType>
+        <EntityType Name="teachers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="courseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.FK__teachers__userId__236943A5" FromRole="teachers" ToRole="account" />
+          <NavigationProperty Name="courses" Relationship="Self.FK__teachers__course__7E37BEF6" FromRole="teachers" ToRole="courses" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="grades" Relationship="Self.FK__grades__teamId__690797E6" FromRole="team" ToRole="grades" />
+          <NavigationProperty Name="groupMembers" Relationship="Self.FK__groupMemb__teamI__72910220" FromRole="team" ToRole="groupMembers" />
+          <NavigationProperty Name="submissions" Relationship="Self.FK__submissio__teamI__719CDDE7" FromRole="team" ToRole="submissions" />
+          <NavigationProperty Name="teams" Relationship="Self.FK__teams__teamId__6FB49575" FromRole="team" ToRole="teams" />
+        </EntityType>
+        <EntityType Name="teams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="assignmentId" Type="Int32" Nullable="false" />
+          <Property Name="teamId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.FK__teams__userId__70A8B9AE" FromRole="teams" ToRole="account" />
+          <NavigationProperty Name="assignment" Relationship="Self.FK__teams__assignmen__123EB7A3" FromRole="teams" ToRole="assignment" />
+          <NavigationProperty Name="team" Relationship="Self.FK__teams__teamId__6FB49575" FromRole="teams" ToRole="team" />
+        </EntityType>
+        <EntityType Name="testcase">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="input" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="output" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="testcaseOutput" Relationship="Self.FK__testcaseO__testc__5BAD9CC8" FromRole="testcase" ToRole="testcaseOutput" />
+          <NavigationProperty Name="testcases" Relationship="Self.FK__testcases__testc__00200768" FromRole="testcase" ToRole="testcases" />
+        </EntityType>
+        <EntityType Name="testcaseOutput">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="submissionId" Type="Int32" Nullable="false" />
+          <Property Name="testcaseId" Type="Int32" Nullable="false" />
+          <Property Name="ideoneId" Type="Int32" />
+          <Property Name="output" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="statusId" Type="Int32" />
+          <Property Name="resultId" Type="Int32" />
+          <Property Name="stderr" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="time" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="submission" Relationship="Self.FK__testcaseO__submi__6CD828CA" FromRole="testcaseOutput" ToRole="submission" />
+          <NavigationProperty Name="testcase" Relationship="Self.FK__testcaseO__testc__5BAD9CC8" FromRole="testcaseOutput" ToRole="testcase" />
+        </EntityType>
+        <EntityType Name="testcases">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="testcaseId" Type="Int32" Nullable="false" />
+          <Property Name="problemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="problem" Relationship="Self.FK__testcases__probl__01142BA1" FromRole="testcases" ToRole="problem" />
+          <NavigationProperty Name="testcase" Relationship="Self.FK__testcases__testc__00200768" FromRole="testcases" ToRole="testcase" />
+        </EntityType>
+        <Association Name="FK__account__roleId__22751F6C">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__autho__4D5F7D71">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="clarificationAnswer" Type="Self.clarificationAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarificationAnswer">
+              <PropertyRef Name="authorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__autho__6166761E">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="clarification" Type="Self.clarification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarification">
+              <PropertyRef Name="authorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__groupMemb__userI__245D67DE">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="groupMembers" Type="Self.groupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="groupMembers">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teachers__userId__236943A5">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="teachers" Type="Self.teachers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teachers">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teams__userId__70A8B9AE">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="teams" Type="Self.teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teams">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_account">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__assignmen__cours__10566F31">
+          <End Role="courses" Type="Self.courses" Multiplicity="1" />
+          <End Role="assignment" Type="Self.assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="assignment">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__grades__assignme__662B2B3B">
+          <End Role="assignment" Type="Self.assignment" Multiplicity="1" />
+          <End Role="grades" Type="Self.grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assignment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grades">
+              <PropertyRef Name="assignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__problems__assign__114A936A">
+          <End Role="assignment" Type="Self.assignment" Multiplicity="1" />
+          <End Role="problems" Type="Self.problems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assignment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="problems">
+              <PropertyRef Name="assignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teams__assignmen__123EB7A3">
+          <End Role="assignment" Type="Self.assignment" Multiplicity="1" />
+          <End Role="teams" Type="Self.teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assignment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teams">
+              <PropertyRef Name="assignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__clari__607251E5">
+          <End Role="clarification" Type="Self.clarification" Multiplicity="1" />
+          <End Role="clarificationAnswer" Type="Self.clarificationAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clarification">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarificationAnswer">
+              <PropertyRef Name="clarificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__clari__625A9A57">
+          <End Role="clarification" Type="Self.clarification" Multiplicity="1" />
+          <End Role="clarifications" Type="Self.clarifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clarification">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarifications">
+              <PropertyRef Name="clarificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clarifica__probl__0D7A0286">
+          <End Role="problem" Type="Self.problem" Multiplicity="1" />
+          <End Role="clarifications" Type="Self.clarifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="problem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clarifications">
+              <PropertyRef Name="problemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teachers__course__7E37BEF6">
+          <End Role="courses" Type="Self.courses" Multiplicity="1" />
+          <End Role="teachers" Type="Self.teachers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teachers">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_course">
+          <End Role="courses" Type="Self.courses" Multiplicity="1" />
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__grades__teamId__690797E6">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="grades" Type="Self.grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grades">
+              <PropertyRef Name="teamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__groupMemb__teamI__72910220">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="groupMembers" Type="Self.groupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="groupMembers">
+              <PropertyRef Name="teamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__problems__proble__02084FDA">
+          <End Role="problem" Type="Self.problem" Multiplicity="1" />
+          <End Role="problems" Type="Self.problems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="problem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="problems">
+              <PropertyRef Name="problemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__submissio__probl__6DCC4D03">
+          <End Role="problem" Type="Self.problem" Multiplicity="1" />
+          <End Role="submission" Type="Self.submission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="problem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="submission">
+              <PropertyRef Name="problemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testcases__probl__01142BA1">
+          <End Role="problem" Type="Self.problem" Multiplicity="1" />
+          <End Role="testcases" Type="Self.testcases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="problem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="testcases">
+              <PropertyRef Name="problemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__submissio__submi__6EC0713C">
+          <End Role="submission" Type="Self.submission" Multiplicity="1" />
+          <End Role="submissions" Type="Self.submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="submission">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="submissions">
+              <PropertyRef Name="submissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testcaseO__submi__6CD828CA">
+          <End Role="submission" Type="Self.submission" Multiplicity="1" />
+          <End Role="testcaseOutput" Type="Self.testcaseOutput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="submission">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="testcaseOutput">
+              <PropertyRef Name="submissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__submissio__teamI__719CDDE7">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="submissions" Type="Self.submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="submissions">
+              <PropertyRef Name="teamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teams__teamId__6FB49575">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="teams" Type="Self.teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teams">
+              <PropertyRef Name="teamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testcaseO__testc__5BAD9CC8">
+          <End Role="testcase" Type="Self.testcase" Multiplicity="1" />
+          <End Role="testcaseOutput" Type="Self.testcaseOutput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testcase">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="testcaseOutput">
+              <PropertyRef Name="testcaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__testcases__testc__00200768">
+          <End Role="testcase" Type="Self.testcase" Multiplicity="1" />
+          <End Role="testcases" Type="Self.testcases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testcase">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="testcases">
+              <PropertyRef Name="testcaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VLN2_2016_H32Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="account" EntityType="Self.account" />
+          <EntitySet Name="assignment" EntityType="Self.assignment" />
+          <EntitySet Name="clarification" EntityType="Self.clarification" />
+          <EntitySet Name="clarificationAnswer" EntityType="Self.clarificationAnswer" />
+          <EntitySet Name="clarifications" EntityType="Self.clarifications" />
+          <EntitySet Name="courses" EntityType="Self.courses" />
+          <EntitySet Name="grades" EntityType="Self.grades" />
+          <EntitySet Name="groupMembers" EntityType="Self.groupMembers" />
+          <EntitySet Name="problem" EntityType="Self.problem" />
+          <EntitySet Name="problems" EntityType="Self.problems" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="students" EntityType="Self.students" />
+          <EntitySet Name="submission" EntityType="Self.submission" />
+          <EntitySet Name="submissions" EntityType="Self.submissions" />
+          <EntitySet Name="teachers" EntityType="Self.teachers" />
+          <EntitySet Name="team" EntityType="Self.team" />
+          <EntitySet Name="teams" EntityType="Self.teams" />
+          <EntitySet Name="testcase" EntityType="Self.testcase" />
+          <EntitySet Name="testcaseOutput" EntityType="Self.testcaseOutput" />
+          <EntitySet Name="testcases" EntityType="Self.testcases" />
+          <AssociationSet Name="FK__account__roleId__22751F6C" Association="Self.FK__account__roleId__22751F6C">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="account" EntitySet="account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__autho__4D5F7D71" Association="Self.FK__clarifica__autho__4D5F7D71">
+            <End Role="account" EntitySet="account" />
+            <End Role="clarificationAnswer" EntitySet="clarificationAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__autho__6166761E" Association="Self.FK__clarifica__autho__6166761E">
+            <End Role="account" EntitySet="account" />
+            <End Role="clarification" EntitySet="clarification" />
+          </AssociationSet>
+          <AssociationSet Name="FK__groupMemb__userI__245D67DE" Association="Self.FK__groupMemb__userI__245D67DE">
+            <End Role="account" EntitySet="account" />
+            <End Role="groupMembers" EntitySet="groupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teachers__userId__236943A5" Association="Self.FK__teachers__userId__236943A5">
+            <End Role="account" EntitySet="account" />
+            <End Role="teachers" EntitySet="teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teams__userId__70A8B9AE" Association="Self.FK__teams__userId__70A8B9AE">
+            <End Role="account" EntitySet="account" />
+            <End Role="teams" EntitySet="teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_account" Association="Self.FK_students_account">
+            <End Role="account" EntitySet="account" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__assignmen__cours__10566F31" Association="Self.FK__assignmen__cours__10566F31">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="assignment" EntitySet="assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__grades__assignme__662B2B3B" Association="Self.FK__grades__assignme__662B2B3B">
+            <End Role="assignment" EntitySet="assignment" />
+            <End Role="grades" EntitySet="grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__problems__assign__114A936A" Association="Self.FK__problems__assign__114A936A">
+            <End Role="assignment" EntitySet="assignment" />
+            <End Role="problems" EntitySet="problems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teams__assignmen__123EB7A3" Association="Self.FK__teams__assignmen__123EB7A3">
+            <End Role="assignment" EntitySet="assignment" />
+            <End Role="teams" EntitySet="teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__clari__607251E5" Association="Self.FK__clarifica__clari__607251E5">
+            <End Role="clarification" EntitySet="clarification" />
+            <End Role="clarificationAnswer" EntitySet="clarificationAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__clari__625A9A57" Association="Self.FK__clarifica__clari__625A9A57">
+            <End Role="clarification" EntitySet="clarification" />
+            <End Role="clarifications" EntitySet="clarifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clarifica__probl__0D7A0286" Association="Self.FK__clarifica__probl__0D7A0286">
+            <End Role="problem" EntitySet="problem" />
+            <End Role="clarifications" EntitySet="clarifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teachers__course__7E37BEF6" Association="Self.FK__teachers__course__7E37BEF6">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="teachers" EntitySet="teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_course" Association="Self.FK_students_course">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__grades__teamId__690797E6" Association="Self.FK__grades__teamId__690797E6">
+            <End Role="team" EntitySet="team" />
+            <End Role="grades" EntitySet="grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__groupMemb__teamI__72910220" Association="Self.FK__groupMemb__teamI__72910220">
+            <End Role="team" EntitySet="team" />
+            <End Role="groupMembers" EntitySet="groupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__problems__proble__02084FDA" Association="Self.FK__problems__proble__02084FDA">
+            <End Role="problem" EntitySet="problem" />
+            <End Role="problems" EntitySet="problems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__submissio__probl__6DCC4D03" Association="Self.FK__submissio__probl__6DCC4D03">
+            <End Role="problem" EntitySet="problem" />
+            <End Role="submission" EntitySet="submission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testcases__probl__01142BA1" Association="Self.FK__testcases__probl__01142BA1">
+            <End Role="problem" EntitySet="problem" />
+            <End Role="testcases" EntitySet="testcases" />
+          </AssociationSet>
+          <AssociationSet Name="FK__submissio__submi__6EC0713C" Association="Self.FK__submissio__submi__6EC0713C">
+            <End Role="submission" EntitySet="submission" />
+            <End Role="submissions" EntitySet="submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testcaseO__submi__6CD828CA" Association="Self.FK__testcaseO__submi__6CD828CA">
+            <End Role="submission" EntitySet="submission" />
+            <End Role="testcaseOutput" EntitySet="testcaseOutput" />
+          </AssociationSet>
+          <AssociationSet Name="FK__submissio__teamI__719CDDE7" Association="Self.FK__submissio__teamI__719CDDE7">
+            <End Role="team" EntitySet="team" />
+            <End Role="submissions" EntitySet="submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teams__teamId__6FB49575" Association="Self.FK__teams__teamId__6FB49575">
+            <End Role="team" EntitySet="team" />
+            <End Role="teams" EntitySet="teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testcaseO__testc__5BAD9CC8" Association="Self.FK__testcaseO__testc__5BAD9CC8">
+            <End Role="testcase" EntitySet="testcase" />
+            <End Role="testcaseOutput" EntitySet="testcaseOutput" />
+          </AssociationSet>
+          <AssociationSet Name="FK__testcases__testc__00200768" Association="Self.FK__testcases__testc__00200768">
+            <End Role="testcase" EntitySet="testcase" />
+            <End Role="testcases" EntitySet="testcases" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VLN2_2016_H32ModelStoreContainer" CdmEntityContainer="VLN2_2016_H32Entities">
+          <EntitySetMapping Name="account">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+                <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+                <ScalarProperty Name="sessionExp" ColumnName="sessionExp" />
+                <ScalarProperty Name="lastLoggedIn" ColumnName="lastLoggedIn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="assignment">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.assignment">
+              <MappingFragment StoreEntitySet="assignment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clarification">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.clarification">
+              <MappingFragment StoreEntitySet="clarification">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="authorId" ColumnName="authorId" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="posted" ColumnName="posted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clarificationAnswer">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.clarificationAnswer">
+              <MappingFragment StoreEntitySet="clarificationAnswer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="authorId" ColumnName="authorId" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="posted" ColumnName="posted" />
+                <ScalarProperty Name="clarificationId" ColumnName="clarificationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clarifications">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.clarifications">
+              <MappingFragment StoreEntitySet="clarifications">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="clarificationId" ColumnName="clarificationId" />
+                <ScalarProperty Name="problemId" ColumnName="problemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.courses">
+              <MappingFragment StoreEntitySet="courses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grades">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.grades">
+              <MappingFragment StoreEntitySet="grades">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="assignmentId" ColumnName="assignmentId" />
+                <ScalarProperty Name="teamId" ColumnName="teamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groupMembers">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.groupMembers">
+              <MappingFragment StoreEntitySet="groupMembers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="teamId" ColumnName="teamId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="problem">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.problem">
+              <MappingFragment StoreEntitySet="problem">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="sampleInput" ColumnName="sampleInput" />
+                <ScalarProperty Name="sampleOutput" ColumnName="sampleOutput" />
+                <ScalarProperty Name="inputDescription" ColumnName="inputDescription" />
+                <ScalarProperty Name="outputDescription" ColumnName="outputDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="problems">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.problems">
+              <MappingFragment StoreEntitySet="problems">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="problemId" ColumnName="problemId" />
+                <ScalarProperty Name="assignmentId" ColumnName="assignmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.students">
+              <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="submission">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.submission">
+              <MappingFragment StoreEntitySet="submission">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="problemId" ColumnName="problemId" />
+                <ScalarProperty Name="submitted" ColumnName="submitted" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="correctTestcases" ColumnName="correctTestcases" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="submissions">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.submissions">
+              <MappingFragment StoreEntitySet="submissions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="submissionId" ColumnName="submissionId" />
+                <ScalarProperty Name="teamId" ColumnName="teamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teachers">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.teachers">
+              <MappingFragment StoreEntitySet="teachers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="team">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.team">
+              <MappingFragment StoreEntitySet="team">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teams">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.teams">
+              <MappingFragment StoreEntitySet="teams">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="assignmentId" ColumnName="assignmentId" />
+                <ScalarProperty Name="teamId" ColumnName="teamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="testcase">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.testcase">
+              <MappingFragment StoreEntitySet="testcase">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="input" ColumnName="input" />
+                <ScalarProperty Name="output" ColumnName="output" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="testcaseOutput">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.testcaseOutput">
+              <MappingFragment StoreEntitySet="testcaseOutput">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="submissionId" ColumnName="submissionId" />
+                <ScalarProperty Name="testcaseId" ColumnName="testcaseId" />
+                <ScalarProperty Name="ideoneId" ColumnName="ideoneId" />
+                <ScalarProperty Name="output" ColumnName="output" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="resultId" ColumnName="resultId" />
+                <ScalarProperty Name="stderr" ColumnName="stderr" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="testcases">
+            <EntityTypeMapping TypeName="VLN2_2016_H32Model.testcases">
+              <MappingFragment StoreEntitySet="testcases">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="testcaseId" ColumnName="testcaseId" />
+                <ScalarProperty Name="problemId" ColumnName="problemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

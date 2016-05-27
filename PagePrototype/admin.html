@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/main.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/theme.css"  media="screen,projection"/>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+
+        <!-- Dropdown Structure -->
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">Courses</a></li>
+            <li><a href="#!">Grades</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Profile</a></li>
+        </ul>
+
+        <header>
+            <nav class="top-nav blue">
+                <div class="nav-wrapper cont">
+                    <div><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+                    <a href="index.html" class="breadcrumb">Home</a>
+                    <ul class="right hide-on-med-and-down">
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">account_circle</i>Username<i class="material-icons right">arrow_drop_down</i></a></li>
+                    </ul>
+                </div>
+                <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
+                    <li class="blue">
+                        <a class="logo" href="/">
+                            <img id="front-page-logo" src="img/logo_noback.png" class="left" alt=""><div class="logo-text right">MooShark</div></a>
+                    </li>
+                    <li class="bold"><a href="index.html" class="waves-effect waves-teal"><i class="material-icons right blue-text">home</i>Home</a></li>
+                    <li class="bold"><a href="about.html" class="waves-effect waves-teal"><i class="material-icons right green-text">help</i>About</a></li>
+                    <li class="bold"><a href="courses.html" class="waves-effect waves-teal"><i class="material-icons right purple-text">book</i>Courses</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="cont">
+        <div class="row">
+            <div class="col s12 m12 l6">
+                <ul id="task-card" class="collection with-header">
+                    <li class="collection-header cyan">
+                        <h4 class="task-card-title">My Assignments</h4>
+                        <p class="task-card-date">April 27, 2016</p>
+                    </li>
+                    <li class="collection-item">
+                        <input type="checkbox" checked id="task1" />
+                        <label for="task1">Assignment 1. <a href="assignment.html" class="secondary-content"><span class="ultra-small">Today</span></a>
+
+                            </span></br>
+                        <span class="task-cat red darken-1">Data Structures</span>
+                    </li>
+                    <li class="collection-item">
+                        <input type="checkbox" id="task2" />
+                        <label for="task2">Assignment 1. <a href="assignment.html" class="secondary-content"><span class="ultra-small">Monday</span></a>
+                        </span></br>
+                        <span class="task-cat teal">Operating Systems</span>
+                    </li>
+                    <li class="collection-item">
+                        <input type="checkbox" id="task3" />
+                        <label for="task3">Assignment 2. <a href="assignment.html" class="secondary-content"><span class="ultra-small">Next Week</span></a>
+                        </span><br/>
+                        <span class="task-cat blue">Data Structures</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m12 l6">
+                <ul id="task-card" class="collection with-header">
+                    <li class="collection-header purple">
+                        <h4 class="task-card-title">My Courses</h4>
+                        <p class="task-card-date">April 27, 2016</p>
+                    </li>
+                    <a class="collection-link" href="course.html">
+                        <li class="collection-item avatar hover">
+                            <img src="img/hrafn.jpg" alt="" class="circle">
+                            <div class="row nobot">
+                                <div class="col s7">
+                                    <p class="title truncate">Data Structures</p>
+                                </div>
+                                <div class="col s5">
+                                    <p class="due truncate" style="font-style: italic;">Hrafn Loftsson</p>
+                                </div>
+                            </div>
+                            <a href="#!" class="secondary-content"><i class="small material-icons grey-text text-lighten-1">info</i></a>
+                        </li>
+                    </a>
+                    <a class="collection-link" href="course.html">
+                        <li class="collection-item avatar">
+                            <img src="img/frey.jpg" alt="" class="circle">
+                            <div class="row nobot">
+                                <div class="col s7">
+                                    <p class="title truncate">Operating Systems</p>
+                                </div>
+                                <div class="col s5">
+                                    <p class="due truncate" style="font-style: italic;">Freysteinn Alfredsson</p>
+                                </div>
+                            </div>
+                            <a href="#!" class="secondary-content"><i class="small material-icons grey-text text-lighten-1">info</i></a>
+                        </li>
+                    </a>
+                    <a class="collection-link" href="course.html">
+                        <li class="collection-item avatar">
+                            <img src="img/marta.jpg" alt="" class="circle">
+                            <div class="row nobot">
+                                <div class="col s7">
+                                    <p class="title truncate">Software Requirements and Design</p>
+                                </div>
+                                <div class="col s5">
+                                    <p class="due truncate" style="font-style: italic;">Marta Kristin Larusdottir</p>
+                                </div>
+                            </div>
+                            <a href="#!" class="secondary-content"><i class="small material-icons grey-text text-lighten-1">info</i></a>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+
+        </div>
+        </main>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>

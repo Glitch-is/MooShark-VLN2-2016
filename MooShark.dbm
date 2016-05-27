@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.8.2-beta1" last-position="129,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="user">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="683" y="31"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="75"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="varchar" length="40"/>
+	</column>
+	<column name="email">
+		<type name="varchar" length="150"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="varchar" length="257"/>
+	</column>
+	<column name="salt" not-null="true">
+		<type name="varchar" length="257"/>
+	</column>
+	<column name="roleId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="userPK" type="pk-constr" table="public.&quot;user&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="roles">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1018" y="115"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="40"/>
+	</column>
+	<constraint name="rolePK" type="pk-constr" table="public.roles">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="courses">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="935" y="249"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="description">
+		<type name="text"/>
+	</column>
+</table>
+
+<table name="teachers">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="711" y="178"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="courseId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="teachersPK" type="pk-constr" table="public.teachers">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="assignment">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="934" y="391"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="description">
+		<type name="text"/>
+	</column>
+	<column name="deadline" not-null="true">
+		<type name="timestamp"/>
+	</column>
+	<column name="courseId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="assigmentPK" type="pk-constr" table="public.assignment">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="problem">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="591" y="263"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="weight">
+		<type name="integer"/>
+	</column>
+	<column name="sampleInput" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="sampleOutput" not-null="true">
+		<type name="text"/>
+	</column>
+	<constraint name="problemPK" type="pk-constr" table="public.problem">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="testcase">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="266" y="410"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="input" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="output" not-null="true">
+		<type name="text"/>
+	</column>
+	<constraint name="testcasePK" type="pk-constr" table="public.testcase">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="testcases">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="267" y="324"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="testcaseId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="problemId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="testcasesPK" type="pk-constr" table="public.testcases">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="problems">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="605" y="466"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="problemId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="assignmentId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="problemsPK" type="pk-constr" table="public.problems">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="group">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1232" y="261"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="groupPK" type="pk-constr" table="public.&quot;group&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="groups">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1276" y="365"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="assignmentId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="groupsPK" type="pk-constr" table="public.groups">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="submission">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1470" y="76"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="text"/>
+	</column>
+	<constraint name="submissionPK" type="pk-constr" table="public.submission">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="submissions">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1476" y="163"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="submissionId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="groupId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="submissionsPK" type="pk-constr" table="public.submissions">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="groupMembers">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1233" y="6"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="groupId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="groupMembersPK" type="pk-constr" table="public.&quot;groupMembers&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="clarification">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="263" y="128"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="authorId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="message" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="posted" not-null="true" default-value="NOW()::timestamp">
+		<type name="timestamp"/>
+	</column>
+	<constraint name="clarificationPK" type="pk-constr" table="public.clarification">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="clarificationAnswer">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="266" y="19"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="authorId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="message" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="posted" not-null="true" default-value="NOW()::timestamp">
+		<type name="timestamp"/>
+	</column>
+	<column name="clarificationId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="clarificationAnswerPK" type="pk-constr" table="public.&quot;clarificationAnswer&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="clarifications">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="266" y="237"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="clarificationId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="problemId" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="clarificationsId" type="pk-constr" table="public.clarifications">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="roleFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.roles" table="public.&quot;user&quot;">
+	<columns names="roleId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="teacherFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.teachers">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="courseFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.courses" table="public.teachers">
+	<columns names="courseId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="assignmentFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.courses" table="public.assignment">
+	<columns names="courseId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="testcaseFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.testcase" table="public.testcases">
+	<columns names="testcaseId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="problemFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.problem" table="public.testcases">
+	<columns names="problemId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="problemFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.problem" table="public.problems">
+	<columns names="problemId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="assignmentFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.assignment" table="public.problems">
+	<columns names="assignmentId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="groupFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;group&quot;" table="public.groups">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="assignmentFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.assignment" table="public.groups">
+	<columns names="assignmentId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="submissionFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.submission" table="public.submissions">
+	<columns names="submissionId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="groupFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;group&quot;" table="public.submissions">
+	<columns names="groupId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="groupFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;group&quot;" table="public.&quot;groupMembers&quot;">
+	<columns names="groupId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="userFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.&quot;groupMembers&quot;">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="authorFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.clarification">
+	<columns names="authorId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="authorFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.&quot;clarificationAnswer&quot;">
+	<columns names="authorId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="clarificationFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.clarification" table="public.&quot;clarificationAnswer&quot;">
+	<columns names="clarificationId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="clarificationFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.clarification" table="public.clarifications">
+	<columns names="clarificationId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="problemFK" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.problem" table="public.clarifications">
+	<columns names="problemId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_user_roles" type="relfk"
+	 src-table="public.&quot;user&quot;"
+	 dst-table="public.roles"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_teachers_user" type="relfk"
+	 src-table="public.teachers"
+	 dst-table="public.&quot;user&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_teachers_courses" type="relfk"
+	 src-table="public.teachers"
+	 dst-table="public.courses"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="rel_assignment_courses" type="relfk"
+	 src-table="public.assignment"
+	 dst-table="public.courses"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="-" type="relfk"
+	 src-table="public.testcases"
+	 dst-table="public.testcase"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="rel_testcases_problem" type="relfk"
+	 src-table="public.testcases"
+	 dst-table="public.problem"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_someshit" type="relfk"
+	 src-table="public.problems"
+	 dst-table="public.problem"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="rel_problems_assignment" type="relfk"
+	 src-table="public.problems"
+	 dst-table="public.assignment"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_groups_group" type="relfk"
+	 src-table="public.groups"
+	 dst-table="public.&quot;group&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_groups_assignment" type="relfk"
+	 src-table="public.groups"
+	 dst-table="public.assignment"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="rel_submissions_submission" type="relfk"
+	 src-table="public.submissions"
+	 dst-table="public.submission"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_submissions_group" type="relfk"
+	 src-table="public.submissions"
+	 dst-table="public.&quot;group&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_groupMembers_group&quot;" type="relfk"
+	 src-table="public.&quot;groupMembers&quot;"
+	 dst-table="public.&quot;group&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_groupMembers_user&quot;" type="relfk"
+	 src-table="public.&quot;groupMembers&quot;"
+	 dst-table="public.&quot;user&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_clarification_user" type="relfk"
+	 src-table="public.clarification"
+	 dst-table="public.&quot;user&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_clarificationAnswer_user&quot;" type="relfk"
+	 src-table="public.&quot;clarificationAnswer&quot;"
+	 dst-table="public.&quot;user&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_clarificationAnswer_clarification&quot;" type="relfk"
+	 src-table="public.&quot;clarificationAnswer&quot;"
+	 dst-table="public.clarification"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_clarifications_clarification" type="relfk"
+	 src-table="public.clarifications"
+	 dst-table="public.clarification"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_clarifications_problem" type="relfk"
+	 src-table="public.clarifications"
+	 dst-table="public.problem"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+</dbmodel>

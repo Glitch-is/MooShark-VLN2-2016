@@ -1,0 +1,102 @@
+﻿@model MooShark2.Models.ManageProfileViewModel
+@{
+    ViewBag.Title = "My Profile";
+}
+<main class="cont">
+    <h3><span class="cyan cyan-text heading">_</span><span class="heading heading-text">@Model.currentUser.name</span></h3>
+    <div class="row">
+        <div class="col s6 m6 L6">
+            <ul class="collection" style="border:none">
+                <li class="collection-header center ">
+                    <img id="proPic" class="circle center-align" src="@Model.currentUser.imagePath" alt="Your Profile Picture" height="150" width="150" />
+                </li>
+
+                <p class="collection-item cyan white-text card-date">@DateTime.Today.DayOfWeek,  @DateTime.Today.Day/@DateTime.Today.Month/@DateTime.Today.Year</p>
+
+                <li class="collection-item ">
+                    <div>
+                        <strong>Name:</strong>                         
+                        <p class="truncate">
+                            @Model.currentUser.name
+                        </p>
+                    </div>
+                </li>
+                <li class="collection-item ">
+                    <div>
+                       <strong>E-mail:</strong>
+                        <p class="truncate">
+                            @Model.currentUser.email
+                        </p>
+                    </div>
+                </li>
+                <li class="collection-item ">
+                    <div>
+                        <strong>Password:</strong>
+                        <a href="#passwordModel" class="secondary-content modal-trigger">
+                            <i class="material-icons add_fab small tooltipped small" data-position="right" data-tooltip="Edit Password">
+                                edit
+                            </i>
+                        </a>
+                        <p class="truncate" >
+                            ********
+                        </p>
+                    </div>
+                </li>
+                <li class="collection-item ">
+                    <div>
+                        <strong>Image:</strong>
+                        <a href="#imageModel" class="secondary-content modal-trigger">
+                            <i class="material-icons add_fab small tooltipped small editImg " data-position="right" data-tooltip="Edit Image">
+                                edit
+                            </i>
+                        </a>
+                        <p id="imgPath" class="truncate">
+                            @Model.currentUser.imagePath
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+<!--Model View-->
+<!--Image Model-->
+<div id="imageModel" class="modal">
+    <div class="modal-content">
+        <div class="row nobot">
+            <h4 class="modal-header blue-text">Edit Image</h4>
+            @using (Html.BeginForm("ProfileImageChange", "Profile", new { id = Model.currentUser.id},FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" name="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" id="file" type="text" placeholder="Profile image" name="path">
+                    </div>
+                </div>
+                <input id="imgSubmit" type="submit" value="Submit" class="waves-effect waves-blue green btn right" />
+            }
+        </div>
+    </div>
+</div>
+
+<!--Password Model-->
+<div id="passwordModel" class="modal">
+    <div class="modal-content">
+        <div class="row nobot">
+            <h4 class="modal-header blue-text">Edit Password</h4>
+            <form id="ProfilePasswordForm" class="col s12" userId="@Model.currentUser.id" action="ProfilePasswordChange">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" class="password" type="password" name="password">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="modal-submit modal-action modal-close waves-effect waves-blue green btn right" />
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,145 @@
+﻿<!--model IEnumerable<MooShark2.clarification> -->
+@model MooShark2.Models.ClarificationsViewModel
+
+@{
+    ViewBag.Title = "Clarifications";
+}
+<main class="cont">
+    <div class="row nobot">
+        <div class="col s6">
+            <h3><span class="amber lighten-1 amber-text text-lighten-1 heading">_</span><span class="heading heading-text">Clarifications</span></h3>
+        </div>
+        <div class="col s6">
+            <a class="right waves-effect blue lighten-1 waves-light btn backButton"><i class="material-icons left">navigate_before</i>back</a>
+        </div>
+    </div>
+    <div class="row">
+        <a class="btn-floating btn-large waves-effect waves-light cyan right modal-trigger tooltipped" data-tooltip="Add Question" href="#questionModal">
+            <i class="material-icons add_fab">add</i>
+        </a>
+        <div class="col s12 m12">
+            @foreach (var item in Model.clarification)
+            {
+                var currItem = "questionId" + item.question.question.id.ToString();
+                <ul class="collection z-depth-1">
+                    <li class="collection-item avatar hover" id="@currItem">
+                        <div class="row nobot">
+                            <div class="col s1">
+                                <div class="red bold circle white-text center letterBubble">Q</div>
+                            </div>
+                            <div class="col s2">
+                                <div class="title">@item.question.userName</div>
+                            </div>
+                            <div class="col s6">
+                                <div class="description wrap">@item.question.question.message</div>
+                            </div>
+                            <div class="col s2">
+                                <p class="due truncate" style="font-style: italic">@item.question.question.posted</p>
+                               <!-- <a class="tooltipped small editAnswer" data-position="left" data-tooltip="Edit question" href="#addModal" questionId="@item.question.question.id">
+                                    <i class="material-icons small">edit</i>
+                                </a>-->
+                            </div>
+                            <div class="col s1">
+                                <a class="tooltipped small deleteQuestion questionButton" data-position="left" data-tooltip="Delete question" clarId="@item.question.question.id">
+                                    <i class="material-icons small right">delete</i>
+                                </a> 
+                            </div>
+                        </div>
+                        <a class="right btn-floating btn-large waves-effect waves-light green modal-trigger tooltipped questionButton" id="@currItem" data-tooltip="Add Answer" href="#answersModal" clarId="@item.question.question.id">
+                            <i class="material-icons small">add</i>
+                        </a> 
+                    </li>
+                    <div class="col s12 m12">
+                        <ul class="collection z-depth-1" style="color:gray; ">
+                            @foreach (var ans in item.answers.Where(x => x.answer.clarificationId == item.question.question.id))
+                            {
+                                <li class="collection-item avatar hover">
+                                    <div class="row nobot">
+                                        <div class="col s1">
+                                            <div class="blue bold circle white-text center letterBubble">A</div>
+                                        </div>
+                                        <div class="col s2">
+                                            <div class="title truncate">@ans.userName</div>
+                                        </div>
+                                        <div class="col s6">
+                                            <div class="description wrap">@ans.answer.message</div>
+                                        </div>
+                                        <div class="col s2">
+                                            <p class="due truncate" style="font-style: italic">@ans.answer.posted</p>
+
+                                       <!--     <a class="tooltipped small editQuestion" data-position="left" data-tooltip="Edit answer" href="#addModal" answerId="ans.answer.id">
+                                                <i class="material-icons small">edit</i>
+                                            </a>-->
+                                        </div>
+                                        <div class="col s1">
+                                            <a class="tooltipped small deleteAnswer" data-position="left" data-tooltip="Delete answer" clarAnsId="@ans.answer.id">
+                                                <i class="material-icons small right">delete</i>
+                                            </a> 
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                         <!--   <li>
+                                <div class="row nobot">
+                                    <div class="col s1">
+                                        <div class="truncate"> New </div>
+                                    </div>
+                                    <div class="col s11">
+                                        <textarea class="truncate"> </textarea>
+                                    </div>
+                                </div>
+                            </li>
+                                -->
+                        </ul>
+                    </div>
+                </ul>
+                        
+            }
+        </div>
+    </div>
+</main>
+
+<!-- Modals -->
+
+
+    <div id="questionModal" class="modal">
+        <div class="modal-content" style="max-height: 70vh; overflow-y: scroll;">
+            <div class="row nobot">
+                <h4 class="modal-header blue-text">Submit a new quesion</h4>
+                <form id="clarificationQuestionForm" class="col s12" action="/Clarifications/SubmitQuestion">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="newQuestion" class="materialize-textarea" length="500" name="newQuestion"></textarea>
+                            <label for="newQuestion">Description</label>
+                            <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+                        </div>
+                    </div>
+                    <input class="hidden" id="problemId" name="problemId" value="@Model.pId" style="display:none;" />
+                    <input type="submit" value="Submit" class="modal-submit modal-action waves-effect waves-blue green btn right" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="answersModal" class="modal">
+        <div class="modal-content" style="max-height: 450px; overflow-y: scroll;">
+            <div class="row nobot">
+                <h4 class="modal-header blue-text">Submit a new answer</h4>
+                <form id="clarificationAnswersForm" class="col s12" action="">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="newAnswer" class="materialize-textarea" length="500" name="newAnswer"></textarea>
+                            <label for="newAnswer">Description</label>
+                            <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+                        </div>
+
+                    </div>
+                    <input type="submit" value="Submit" class="modal-submit modal-action waves-effect waves-blue green btn right" />
+                    <input class="hidden" id="problemIdQuestion" name="problemIdQuestion" value="@Model.pId" style="display:none;" />
+                    <input class="hidden" id="clarificationId"   name="clarificationId" style="display:none;" />
+                    
+                </form>
+            </div>
+        </div>
+    </div>

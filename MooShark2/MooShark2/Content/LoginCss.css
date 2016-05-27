@@ -1,0 +1,74 @@
+﻿.main {
+    width: 100%;
+    height: 100vh;
+    background: #61abff;
+}
+
+#thaForm {
+    background-color: #fff;
+}
+
+/* label focus color */
+.input-field input[type=email]:focus + label {
+    color: #61abff;
+}
+/* label underline focus color */
+.input-field input[type=email]:focus {
+    border-bottom: 1px solid #61abff;
+    box-shadow: 0 1px 0 0 #61abff;
+}
+
+/* label focus color */
+.input-field input[type=password]:focus + label {
+    color: #61abff;
+}
+/* label underline focus color */
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #61abff;
+    box-shadow: 0 1px 0 0 #61abff;
+}
+
+.alert {
+    padding: 1rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    margin: 0.5rem;
+    border-radius: 8px;
+}
+
+.alert-error {
+    background-color: rgba(255, 0, 0, 0.3);
+    color: rgba(185, 0, 0, 1);
+}
+
+.alert-success {
+    background-color: rgba(0, 255, 0, 0.3);
+    color: rgba(0, 185, 0, 1);
+}
+
+.login-logo {
+    height: 20rem;
+    margin-left: 2.6rem;
+    margin-top: -7rem;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+    .login-logo {
+        max-width: 70%;
+        height: auto;
+        margin-left: 15%;
+    }
+}

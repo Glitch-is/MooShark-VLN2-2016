@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <title>@ViewData["Title"] - MooShark</title>
+
+        <environment names="Development">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link rel="stylesheet" href="~/css/all.css" />
+            <script type="text/javascript" src="~/js/all.js" ></script>
+        </environment>
+        <environment names="Staging,Production">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link rel="stylesheet" href="~/css/all.css" asp-append-version="true" />
+            <script type="text/javascript" src="~/js/all.js" ></script>
+        </environment>
+        @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+    </head>
+
+    <body>
+
+        <!-- Dropdown Structure -->
+        <ul id="userDropdown" class="dropdown-content">
+            <li><a href="#!">Grades</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Profile</a></li>
+            <li><a href="#!">Admin Panel</a></li>
+            <li><a href="#!">Logout</a></li>
+        </ul>
+
+        <header>
+            <nav class="top-nav blue">
+                <div class="nav-wrapper cont">
+                    <div><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+                    <a href="index.html" class="breadcrumb">Home</a>
+                    <ul class="right hide-on-med-and-down">
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-button" href="#!" data-activates="userDropdown"><i class="material-icons left">account_circle</i>Username<i class="material-icons right">arrow_drop_down</i></a></li>
+                    </ul>
+                </div>
+                <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
+                    <li class="blue">
+                        <a class="logo" href="/">
+                            <img id="front-page-logo" src="img/logo_noback.png" class="left" alt=""><div class="logo-text right">MooShark</div></a>
+                    </li>
+                    <li class="bold"><a href="index.html" class="waves-effect waves-teal"><i class="material-icons right blue-text">home</i>Home</a></li>
+                    <li class="bold"><a href="about.html" class="waves-effect waves-teal"><i class="material-icons right green-text">help</i>About</a></li>
+                    <li class="bold"><a href="courses.html" class="waves-effect waves-teal"><i class="material-icons right purple-text">book</i>Courses</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="cont">
+
+        @RenderBody()
+
+        </main>
+
+        <environment names="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script type="text/javascript" src="~/js/all.js" asp-append-version="true"></script>
+            <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script type="text/javascript" src="~/js/all.js" asp-append-version="true"></script>
+            <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script>
+        </environment>
+
+    </body>
+</html>

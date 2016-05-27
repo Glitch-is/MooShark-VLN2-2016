@@ -1,0 +1,97 @@
+﻿@model MooShark2.Models.ManageUsersViewModel
+@{
+    ViewBag.Title = "Admin Control";
+}
+<main class="cont">
+    <div class="row nobot">
+        <div class="col s6">
+            <h3><span class="cyan cyan-text heading">_</span><span class="heading heading-text">Users</span></h3>
+        </div>
+        <div class="col s6">
+            <a class="right waves-effect blue lighten-1 waves-light btn backButton"><i class="material-icons left">navigate_before</i>back</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <ul class="collection z-depth-1" id="userList">
+                @foreach(var item in Model.users)
+                {
+                    var currItem = "itemId" + item.id.ToString();
+                    <li class="collection-item avatar hover" id="@currItem">
+                        <i class="material-icons circle green lighten-1"></i>
+                        <div class="row nobot">
+                            <div class="col s6 m2">
+                                <p class="title truncate">@item.email</p>
+                            </div>
+                            <div class="col hide-on-small-only m7">
+                                <p class="description truncate">@item.roles.name</p>
+                            </div>
+                                <a class="modal-trigger tooltipped small editUser" data-position="left" data-tooltip="Edit user" href="#addModal" userid="@item.id">
+                                    <i class="material-icons small">edit</i>
+                                </a>
+                                <a class="tooltipped small deleteUser" data-position="left" data-tooltip="Delete user" userid="@item.id">
+                                    <i class="material-icons small">delete</i>
+                                </a>                               
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red modal-trigger tooltipped" id="addUser" data-position="left" data-tooltip="Add user" href="#addModal">
+            <i class="large material-icons add_fab">add</i>
+        </a>
+    </div>
+</main>
+
+<div id="addModal" class="modal">
+    <div class="modal-content" style="max-height: 70vh; overflow-y: scroll;">
+        <div class="row nobot">
+            <h4 class="modal-header blue-text">Manage User</h4>
+            <form id="userForm" class="col s12" action="">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" type="text" class="validate" name="name">
+                        <label for="name">Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate" name="email">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" class="password" type="password" name="password">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12" >
+                        <select id="role" name="role">
+                            <option value="1">Student</option>
+                            <option value="2">Teacher</option>
+                            <option value="3">Admin</option>
+                        </select>
+                        <label for="role">Role</label>
+                    </div>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" id="imgPath" type="text" placeholder="Upload image" name="imgPath">
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="modal-submit modal-action modal-close waves-effect waves-blue green btn right" />
+            </form>
+        </div>
+    </div>
+</div>

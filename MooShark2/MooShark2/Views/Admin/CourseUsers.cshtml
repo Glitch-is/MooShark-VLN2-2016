@@ -1,0 +1,69 @@
+﻿@model  MooShark2.Models.CourseUsersViewModel
+@{
+    ViewBag.Title = "Admin Control";
+}
+<main class="cont">
+
+    <div class="row nobot">
+        <div class="col s6">
+            <h3><span class="heading" style="color: rgba( 1, 26, 237 , 48); background-color: rgba( 1, 26, 237 , 48);">_</span><span class="heading heading-text">Enrolled</span></h3>
+        </div>
+        <div class="col s6">
+            <a class="right waves-effect blue lighten-1 waves-light btn backButton"><i class="material-icons left">navigate_before</i>back</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <ul class="collection z-depth-1" id="enrolledList" courseId="@Model.courseId">
+                @foreach(var item in Model.enrolled)
+                {
+                    var currItem = "itemId" + item.id.ToString();
+                    <li class="collection-item avatar hover" id="@currItem">
+                        <i class="material-icons circle green lighten-1"></i>
+                        <div class="row nobot">
+                            <div class="col s6 m2">
+                                <p class="title truncate">@item.email</p>
+                            </div>
+                            <div class="col hide-on-small-only m7">
+                                <p class="description truncate">@item.roles.name</p>
+                            </div>
+                            <a class="tooltipped small removeUserFromCourse" data-position="left" data-tooltip="Remove" userid="@item.id">
+                                <i class="material-icons small">close</i>
+                            </a>
+                        </div>
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="row nobot">
+        <div class="col s6">
+            <h3><span class="heading" style="color: rgba(191, 12, 195, 179); background-color: rgba(191, 12, 195, 179);">_</span><span class="heading heading-text">Not enrolled</span></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <ul class="collection z-depth-1" id="notEnrolledList" courseId="@Model.courseId">
+                @foreach(var item in Model.notEnrolled)
+                {
+                    var currItem = "itemId" + item.id.ToString();
+                    <li class="collection-item avatar hover" id="@currItem">
+                        <i class="material-icons circle green lighten-1"></i>
+                        <div class="row nobot">
+                            <div class="col s6 m2">
+                                <p class="title truncate">@item.email</p>
+                            </div>
+                            <div class="col hide-on-small-only m7">
+                                <p class="description truncate">@item.roles.name</p>
+                            </div>
+                            <a class="tooltipped small addUserToCourse" data-position="left" data-tooltip="Add" userid="@item.id">
+                                <i class="material-icons small">add</i>
+                            </a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</main>

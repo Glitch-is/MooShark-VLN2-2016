@@ -1,0 +1,179 @@
+﻿@model MooShark2.Models.EditProblemViewModel
+
+@{
+    ViewBag.Title = "EditProblem";
+}
+
+<main class="cont">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="row nobot">
+                <div class="col s12 m8">
+                    <h2>Edit Problem</h2>
+                    <div class="panel problem z-depth-1">
+                        <div class="row nobot">
+                            <h5>Name</h5>
+                            <p>
+                                @Model.prob.name<br />
+                            </p>
+                            <h5>Description</h5>
+                            <p>
+                                @Model.prob.description<br />
+                            </p>
+                            <p>
+                                <h5>Weight</h5>
+                                @Model.prob.weight
+                            </p>
+                            <h5>Input</h5>
+                            <p>
+                                @Model.prob.inputDescription<br />
+                                <h5>Output</h5>
+                            </p>
+                            <p>
+                                @Model.prob.outputDescription<br />
+                            </p>
+                            <p>
+                                <h5>Sample input</h5>
+                                @Model.prob.sampleInput<br />
+                            </p>
+                            <p>
+                                <h5>Sample output</h5>
+                                @Model.prob.sampleOutput
+                            </p>
+                        </div>
+                        <a href="#editProb" class="waves-effect waves-light btn green modal-trigger editProblem" problemId="@Model.prob.id"><i class="material-icons left">edit</i>Edit</a>
+                        <a href="#areYouSure" class="waves-effect waves-light btn red modal-trigger"><i class="material-icons left">delete</i>Delete</a>
+                        <a href="#addTest" class="waves-effect waves-light btn blue modal-trigger"><i class="material-icons left">add</i>Add testcase</a>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <h2>Test cases</h2>
+                    @foreach (var item in Model.cases)
+                    {
+                        <div class="panel problem z-depth-1">
+                             <div class="row nobot">
+                                <h5>Input</h5>
+                                <p>@item.input</p>
+                                <h5>Output</h5>
+                                <p>@item.output</p>
+                                <a href="#editTest" class="waves-effect waves-light btn green modal-trigger editTestcase" testcaseId="@item.id"><i class="material-icons left">edit</i>Edit</a>
+                                <a class="waves-effect waves-light btn red deleteTestcase" testcaseId="@item.id"><i class="material-icons left">delete</i>Delete</a>                    
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modal -->
+
+<div id="editProb" class="modal">
+    <div class="modal-content" style="max-height: 70vh; overflow-y: scroll;">
+        <div class="row nobot">
+            <h4 class="modal-header blue-text">Edit problem</h4>
+            <form class="col s12" id="problemForm2" problemId="@Model.prob.id" action="">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" type="text" class="validate" name="name">
+                        <label for="name">Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="description" class="materialize-textarea" length="500" name="description"></textarea>
+                        <label for="description">Description</label>
+                        <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="weight">Weight</label>
+                        <p class="range-field">
+                            <input type="range" id="weight" min="0" max="100" step="5" />
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="sampleinput" type="text" class="validate" name="sampleinput">
+                        <label for="sampleinput">Sample input</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="sampleoutput" type="text" class="validate" name="sampleoutput">
+                        <label for="sampleoutput">Sample output</label>
+                    </div>
+                </div>
+                <input type="submit" value="Save" class="modal-submit modal-action modal-close waves-effect waves-blue green btn" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="areYouSure" class="modal">
+    <div class="modal-content">
+        <div class="row nobot">
+            <h4 class="modal-header blue-text">Are you sure you want to delete @Model.prob.name?</h4>
+            <a class="waves-effect waves-light btn green deleteProblem" problemid="@Model.prob.id">
+                <i class="material-icons left">delete</i>Yes
+            </a>
+            <a class="waves-effect waves-light btn red modal-action modal-close">
+                <i class="material-icons left">not_interested</i>No
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="addTest" class="modal">
+    <div class="modal-content" style="max-height: 70vh; overflow-y: scroll;">
+        <div class="row nobot">
+            <h4 class="modal-header blue-text">Add Testcase</h4>
+            <form class="col s12" problemId="@Model.prob.id" id="testcaseForm2" action="/Problems/AddTestCase/@Model.prob.id">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="input" class="materialize-textarea" length="500" name="input"></textarea>
+                        <label for="input">Input</label>
+                        <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="output" class="materialize-textarea" length="500" name="output"></textarea>
+                        <label for="output">Output</label>
+                        <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="modal-submit modal-action modal-close waves-effect waves-blue light-green btn right" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="editTest" class="modal">
+    <div class="modal-content" style="max-height: 70vh; overflow-y: scroll;">
+        <div class="row nobot">
+            <h4 class="modal-header blue-text">Edit Testcase</h4>
+            <form class="col s12" id="testcaseForm3" action="/Problems/EditTestCase">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="input2" class="materialize-textarea" length="500" name="input2"></textarea>
+                        <label for="input2">Input</label>
+                        <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="output2" class="materialize-textarea" length="500" name="output2"></textarea>
+                        <label for="output2">Output</label>
+                        <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+                    </div>
+                </div>
+                <input type="submit" value="Save" class="modal-submit modal-action modal-close waves-effect waves-blue light-green btn right"/>
+            </form>
+        </div>
+    </div>
+</div>
+

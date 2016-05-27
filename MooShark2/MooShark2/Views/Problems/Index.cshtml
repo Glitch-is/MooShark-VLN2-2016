@@ -1,0 +1,214 @@
+﻿@model MooShark2.Models.ProblemsViewModel
+    @{ 
+        ViewBag.title = "Problems";
+    }
+<main class="cont">
+    <div class="row nobot">
+        <div class="col s6">
+            <h3><span class="cyan cyan-text heading">_</span><span class="heading heading-text">Problems</span></h3>
+        </div>
+        <div class="col s6">
+            <a class="right waves-effect blue lighten-1 waves-light btn backButton"><i class="material-icons left">navigate_before</i>back</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col s12 m9">
+            <ul class="collection z-depth-1">
+
+                @foreach (var item in Model.probs)
+                {
+                    <a class="collection-link" href="@Url.Action("Problem", "Problems", new { id = item.id })">
+                        <li class="collection-item avatar hover">
+                            <i class="material-icons circle green lighten-1"></i>
+                            <div class="row nobot">
+                                <div class="col s6 m2">
+                                    <p class="title truncate">@item.name</p>
+                                </div>
+                                <div class="col hide-on-small-only m7">
+                                    <p class="description truncate">@item.description</p>
+                                </div>
+                                <div class="col s5 m2">
+                                    <p class="due truncate">@item.weight</p>
+                                </div>
+                                <div class="col s1 m1">
+                                    <span class="secondary-content"><i class="small material-icons green-text">done_all</i></span>
+                                </div>
+                            </div>
+                        </li>
+                    </a>
+                }
+
+            </ul>
+        </div>
+        <div class="col s12 m3">
+            <div class="panel blue-darken-1 z-depth-1" style="margin-top: 0.5rem;">
+                <h5 class="teal-text" style="font-weight: 300; margin-top: 0;">My Team</h5>
+                <ul class="collection" id="teamMembers" action="/Assignments/RemoveMember/@Model.aid">
+                    @foreach (var member in Model.teamMembers)
+                    {
+                        <li class="collection-item avatar">
+                            <div class="row nobot">
+                                <div class="col s2">
+                                    <img src="@member.imagePath" alt="" class="circle">
+                                </div>
+                                <div class="col s9">
+                                    <span class="title truncate">@member.name</span>
+                                </div>
+                                <div class="col s1">
+                                    <a href="#!"  class="secondary-content removeMember" userid="@member.id"><i class="material-icons red-text right add_fab tooltipped" data-position="left" data-tooltip="Remove Member">clear</i></a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <a style="margin-top: -0.7rem;" class="btn-floating btn-large waves-effect waves-light cyan right modal-trigger tooltipped" data-position="left" data-tooltip="Add Team Member" href="#teamModal">
+                    <i class="material-icons add_fab">add</i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        @if(Model.currentUser.roleId > 1)
+        {
+            <a class="btn-floating btn-large red modal-trigger tooltipped" data-position="left" data-tooltip="Add Problem" href="#addModal">
+                <i class="large material-icons add_fab">add</i>
+            </a>
+            <ul>
+                <li><a href="@Url.Action("Index", "Grades", new { id = Model.aid })" class="btn-floating green darken-1 tooltipped" data-position="left" data-tooltip="Grades"><i class="material-icons">grade</i></a></li>
+                <li>
+                    <a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="View scoreboard" href="@Url.Action("Scoreboard", "Problems", new { id = Model.aid })">
+                        <i class="material-icons">show_chart</i>
+                    </a>
+                </li>
+            </ul>
+        }
+        @if(Model.currentUser.roleId == 1)
+        {
+            <a class="btn-floating btn-large yellow darken-1 tooltipped" data-position="left" data-tooltip="View scoreboard" href="@Url.Action("Scoreboard", "Problems", new { id = Model.aid } )">
+                <i class="large material-icons add_fab">show_chart</i>
+            </a>
+        }
+    </div>
+</main>
+
+<!-- Modal Structure -->
+@if (Model.currentUser.roleId > 1)
+{
+    <div id="addModal" class="modal">
+        <div class="modal-content" style="max-height: 70vh; overflow-y: scroll;">
+            <div class="row nobot">
+                <h4 class="modal-header blue-text">Add problem</h4>
+                <form class="col s12" id="problemForm3" action="/Problems/Create/@Model.aid">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="name" type="text" class="validate" name="name">
+                            <label for="name">Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="description" class="materialize-textarea" length="500" name="description"></textarea>
+                            <label for="description">Description</label>
+                            <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="weight">Weight</label>
+                            <p class="range-field">
+                                <input type="range" id="weight" min="0" max="100" step="5" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="inputdescription" type="text" class="validate" name="inputdescription">
+                            <label for="inputdescription">Input description</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="outputdescription" type="text" class="validate" name="outputdescription">
+                            <label for="outputdescription">Output description</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="sampleinput" type="text" class="validate" name="sampleinput">
+                            <label for="sampleinput">Sample input</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="sampleoutput" type="text" class="validate" name="sampleoutput">
+                            <label for="sampleoutput">Sample output</label>
+                        </div>
+                    </div>
+                    <input class="hidden" id="assignmentId" name="assignmentId" style="visibility: hidden;" />
+                    <input type="submit" value="Save" class="modal-submit modal-action modal-close waves-effect waves-blue green btn" />
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="teamModal" class="modal">
+    <div class="modal-content">
+        <div class="row nobot">
+            <h5 class="modal-header purple-text">Add Team Member</h5>
+
+            <div class="col s12">
+                <div class="row nobot">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">search</i>
+                        <input id="teamSearch" type="text" class="validate" action="/Courses/SearchUsers/@Model.cid">
+                        <label for="teamSearch">Search</label>
+                    </div>
+                </div>
+
+                <div class="row nobot">
+                    <ul class="collection" id="teamSearchResult" action="/Assignments/AddTeamMember/@Model.aid">
+                    </ul>
+                </div>
+
+                <div class="row nobot">
+                    <div id="teamSpinner" class="preloader-wrapper big active" style="margin: 0 auto; display: block; margin-top: 0.6rem;">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Handlebar templates   -->
+<script id="student-template" type="text/x-handlebars-template">
+    {{#each .}}
+    <div class="addTeamMember hover" action="/Assignments/AddTeamMember/@Model.aid" userid="{{id}}" class="collection-link">
+        <li class="collection-item avatar hover">
+            <div class="row nobot">
+                <div class="col s2">
+                    <img src="{{imagePath}}" alt="" class="circle">
+                </div>
+                <div class="col s9">
+                    <span class="title truncate">{{name}}</span>
+                </div>
+                <div class="col s1">
+                    <span class="secondary-content"><i class="material-icons blue-text right add_fab">add</i></span>
+                </div>
+            </div>
+        </li>
+    </div>
+    {{/each}}
+</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/handlebarsjs/4.0.5/handlebars.min.js"></script>

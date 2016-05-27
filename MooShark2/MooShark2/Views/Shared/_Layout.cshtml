@@ -1,0 +1,71 @@
+﻿@using System.Web.Mvc.Html
+@using MvcSiteMapProvider.Web.Html.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>@ViewBag.Title - MooShark</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    <!--Scripts.Render("~/bundles/materialize")-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script type="text/javascript">
+        var appInsights=window.appInsights||function(config){
+            function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
+        }({
+            instrumentationKey:"50540ddf-361b-4932-ae17-7bfe92a9745d"
+        });
+        
+        window.appInsights=appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+<body>
+    
+        <!-- Dropdown Structure -->
+        <ul id="userdropdown" class="dropdown-content blue-text">
+            <li>@Html.ActionLink("Home", "Index")</li>
+            <li class="divider"></li>
+            <li><a href="@Url.Action("Index", "Admin")">Admin Panel</a></li>
+            <li><a href="@Url.Action("Index", "Profile")">Profile</a></li>
+            <li><a href="/Account/Logout">Logout</a></li>
+        </ul>
+        <header>
+            <nav class="top-nav blue">
+                <div class="nav-wrapper cont">
+
+                    <div><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></div>
+                    <!--Breadcrumbs-->
+                    <a class="breadcrumb">@Html.MvcSiteMap().SiteMapPath()</a>
+                    <!---->
+                    <ul class="right hide-on-med-and-down fix col s8 m8">
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-button" href="#!" data-activates="userdropdown"><div class="profileImageContainer"><img style="height: 42px; width: 42px;" src="@ViewBag.imagePath" alt="" class="profileImg circle"></div><div class="profileName">@ViewBag.userName</div><i class="material-icons right">arrow_drop_down</i></a></li>
+                    </ul>
+                </div>
+               
+
+                <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
+                    <li class="blue">
+                        <a class="logo" href="/">
+                            <img id="front-page-logo" src="~/img/logo_noback.png" class="left" alt=""><div class="logo-text right">MooShark</div>
+                        </a>
+                    </li>
+                    <li class="bold"><a href="@Url.Action("Index", "Home")" class="waves-effect waves-teal"><i class="material-icons left blue-text">home</i>Home</a></li>
+                    <li class="bold"><a href="@Url.Action("About", "Home")" class="waves-effect waves-teal"><i class="material-icons left green-text">help</i>About</a></li>
+                    <li class="bold"><div class="divider"></div></li>
+                    <li class="bold"><a href="@Url.Action("Index", "Courses")" class="waves-effect waves-teal"><i class="material-icons left purple-text">book</i>Courses</a></li>
+                </ul>
+            </nav>
+        </header>
+            <!--To do Laga virkni í loader-->
+            
+        @RenderBody()
+         
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/materialize")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

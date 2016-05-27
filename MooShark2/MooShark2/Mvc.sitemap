@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Home" controller="Home" action="Index">
+    <mvcSiteMapNode title="Profile" controller="Profile" action="Index"/>
+    <mvcSiteMapNode title="About" controller="Home" action="About"/>
+    <mvcSiteMapNode title="Courses" controller="Courses" action="Index">
+      <mvcSiteMapNode title="Assignments" controller="Assignments" action="Index" preservedRouteParameters="id">
+        <mvcSiteMapNode title="Problems" controller="Problems" action="Index" preservedRouteParameters="id, assignmentId">
+          <mvcSiteMapNode title="Problem" controller="Problems" action="Problem" preservedRouteParameters="id, problemId, assignmentId">
+            <mvcSiteMapNode title="Clarifications" controller="Clarifications" action="Index" preservedRouteParameters="id"/>
+            <mvcSiteMapNode title="Clarifications" controller="Clarifications" action="Create" preservedRouteParameters="id"/>
+            <mvcSiteMapNode title="Submissions" controller="Submissions" action="Index" preservedRouteParameters="id">
+              <mvcSiteMapNode title="Submission" controller="Submissions" action="Submission" preservedRouteParameters="id"/>
+            </mvcSiteMapNode>
+          </mvcSiteMapNode>
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

@@ -1,0 +1,53 @@
+﻿@model MooShark2.Models.ScoreboardViewModel
+@{
+    ViewBag.Title = "Scoreboard";
+}
+<main class="cont">
+    <div class="row nobot">
+        <div class="col s6">
+            <h3><span class="deep-purple accent-1 deep-purple-text text-accent-1 heading">_</span><span class="heading heading-text">@Model.assignment.name</span></h3>
+        </div>
+        <div class="col s6">
+            <a class="right waves-effect blue lighten-1 waves-light btn backButton"><i class="material-icons left">navigate_before</i>back</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <table class="panel z-depth-1 striped responsive-table centered col s8" style="margin-left: 12%;">
+            <thead>
+                <tr>
+                    <th data-field="teams">Team</th>
+                    @for(int i = 0; i < Model.probs; i++)
+                    {
+                        var df = "Problem";
+                        df += i;
+                        <th data-field=df>@i</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.tableData)
+                {
+                    <tr>
+                        <td class="purple-text">@item.name</td>
+                    
+                    @foreach(var item2 in item.success)
+                    {
+                        if(item2)
+                        {
+                            <td>
+                                <div class="scoreBoardIcon"><i class="small material-icons green-text">check</i></div>
+                            </td>
+                        }
+                        else{
+                            <td>
+                                <div class="scoreBoardIcon"><i class="small material-icons red-text" style="visibility: hidden;">clear</i></div>
+                            </td>
+                        }
+                    }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>

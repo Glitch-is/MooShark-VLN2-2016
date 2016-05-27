@@ -1,0 +1,87 @@
+@model MooShark.Models.Problem
+
+<h3><span class="yellow yellow-text darken-1 text-darken-1 lighten-2 text-lighten-2 heading">_</span><span class="heading heading-text"> @Model.name</span></h3>
+<div class="row nobot">
+    <div class="col s12 m8">
+        <div class="panel problem z-depth-1">
+            <div class="row nobot">
+                <h5>Description</h5>
+                <p>@Model.description<br/>
+                <h5>Input</h5>
+                <p class="red">TODO: This needs to be added to the model<br/>
+                <h5>Output</h5>
+                <p class="red">TODO: This needs to be added to the model<br/>
+            </div>
+            <div class="row nobot">
+                <div class="col s6">
+                    <p><b>Sample input</b></p>
+                    <pre>@Model.sampleInput</pre>
+                </div>
+                <div class="col s6">
+                    <p><b>Sample output</b></p>
+                    <pre>@Model.sampleOutput</pre>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card problem">
+            <div class="card-content purple white-text">
+                <p class="card-stats-title center"><i class="material-icons"></i>Weight</p>
+                <h4 class="card-stats-number center">@Model.weight</h4>
+                </p>
+            </div>
+            <div class="card-action purple darken-2">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 m8">
+        <div class="panel z-depth-1l">
+            <h4 class="title blue-text text-darken-4"><i class="material-icons left blue-text text-darken-3" style="font-size: 2.7rem;">code</i>Code</h4>
+            <div id="editor" class="z-depth-1">function foo(items) {
+var x = "All this is syntax highlighted";
+return x;
+}</div>
+            <div class="row nobot">
+                <a href="stats.html" id="submit-code" class="waves-effect waves-light btn green right"><i class="material-icons left">play_arrow</i>Submit Code</a>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="panel z-depth-1">
+            <div class="row nobot ">
+                <div class="input-field">
+                    <select id="lang-select">
+                        <option selected>Python</option>
+                        <option>C++</option>
+                        <option>C#</option>
+                    </select>
+                    <label style="margin-left: -1rem;">Language</label>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large green lighten-2" >
+        <i class="large material-icons add_fab">view_list</i>
+    </a>
+    <ul>
+        <li><a class="btn-floating yellow darken-1"><i class="material-icons">question_answer</i></a></li>
+        <li><a class="btn-floating teal darken-1"><i class="material-icons">insert_chart</i></a></li>
+    </ul>
+</div>

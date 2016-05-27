@@ -1,0 +1,59 @@
+﻿@using System.Collections.Generic
+@using Microsoft.AspNet.Http
+@using Microsoft.AspNet.Http.Authentication
+@using MooShark2.Models
+@model LoginViewModel
+    @{
+        Layout = null;
+    }
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="~/Content/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="~/Content/LoginCss.css" media="screen,projection" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+</head>
+<body>
+    <div class="valign-wrapper main">
+        <div class="row valign dafrom">
+            <img src="~/img/logo_nonoback.png" class="valign login-logo" />
+            <div class="col s12" style="width: 25rem;">
+                @using(Html.BeginForm("Login", "Account", FormMethod.Post, new { @id = "thaForm", @class = "s12 z-depth-4 panel", role = "form" }))
+                {
+                    <h5 class="blue-text" style="font-weight: 300; margin: 0; padding-left: 1rem; padding-top: 0.5rem;">Login</h5>
+                        if (ViewBag.Error != null)
+                        {
+                            <div id="alert" class="alert alert-danger">
+                                @ViewBag.Error
+                            </div>
+                        }
+                        <div class="input-fields">
+                            <div style="margin: 0;" class="row">
+                                <div class="input-field col s12">
+                                    <i class="small material-icons prefix">person</i>
+                                    @Html.LabelFor(m => m.Email)
+                                    @Html.TextBoxFor(m => m.Email, new { @type = "email", @class = "validate" })
+                                </div>
+                            </div>
+                            <div style="margin: 0;" class="row">
+                                <div class="input-field col s12">
+                                    <i class="small material-icons prefix">lock</i>
+                                    @Html.LabelFor(m => m.Password)
+                                    @Html.PasswordFor(m => m.Password, new { @class = "validate" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="signIn" style="width: 100%;" class="btn waves-effect waves-light blue" type="submit">Sign in</button>
+                }
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/materialize.min.js"></script>
+</body>
+</html>
